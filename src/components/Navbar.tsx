@@ -60,10 +60,10 @@ export default function Navbar() {
             </Link>
           ))}
           <a
-            href="https://www.linkedin.com/in/hermeslopez/"
+            href="https://www.linkedin.com/in/hermeslopez1/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm text-[#888] hover:text-white transition-colors"
+            className="text-sm bg-[#CCFF33] text-black font-semibold px-4 py-1.5 rounded-full hover:bg-[#CCFF33]/90 transition-colors"
           >
             Contact
           </a>
@@ -72,8 +72,8 @@ export default function Navbar() {
         {/* Available badge */}
         <div className="flex items-center gap-2 bg-[#111] border border-[#1f1f1f] rounded-full px-3 py-1.5">
           <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#CCFF33] opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#CCFF33]" />
           </span>
           <span className="text-xs text-[#888]">Available for work</span>
         </div>
