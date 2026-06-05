@@ -54,7 +54,7 @@ export default function Hero() {
             <motion.h1
               initial="hidden" animate="visible" variants={slideRight}
               className="font-black text-white uppercase leading-[0.86] tracking-[-0.04em]"
-              style={{ fontSize: "clamp(60px, 18vw, 80px)" }}
+              style={{ fontSize: "clamp(44px, min(18vw, 13vh), 78px)" }}
             >
               Product
             </motion.h1>
@@ -96,7 +96,7 @@ export default function Hero() {
             <motion.h1
               initial="hidden" animate="visible" variants={slideLeft}
               className="font-black text-white uppercase leading-[0.86] tracking-[-0.04em]"
-              style={{ fontSize: "clamp(60px, 18vw, 80px)" }}
+              style={{ fontSize: "clamp(44px, min(18vw, 13vh), 78px)" }}
             >
               Designer
             </motion.h1>
@@ -209,3 +209,4 @@ export default function Hero() {
     </section>
   );
 }
+

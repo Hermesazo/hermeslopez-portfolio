@@ -16,7 +16,7 @@ export default function ProjectGrid() {
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[13vw] md:text-[9vw] font-black text-white uppercase leading-none tracking-[-0.03em]"
+            className="text-[13vw] md:text-[9vw] font-black text-white uppercase leading-none tracking-[-0.03em] text-center"
           >
             Featured Projects
           </motion.h2>
@@ -44,3 +44,4 @@ export default function ProjectGrid() {
     </section>
   );
 }
+
