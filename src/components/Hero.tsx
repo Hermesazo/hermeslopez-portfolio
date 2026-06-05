@@ -7,172 +7,177 @@ import type { Variants } from "framer-motion";
 const ease = [0.16, 1, 0.3, 1] as const;
 
 const slideRight: Variants = {
-  hidden: { x: 50, opacity: 0 },
-  visible: { x: 0, opacity: 1, transition: { duration: 0.8, ease } },
+  hidden: { x: 44, opacity: 0 },
+  visible: { x: 0, opacity: 1, transition: { duration: 0.78, ease } },
 };
 const slideLeft: Variants = {
-  hidden: { x: -50, opacity: 0 },
-  visible: { x: 0, opacity: 1, transition: { duration: 0.8, ease, delay: 0.12 } },
+  hidden: { x: -44, opacity: 0 },
+  visible: { x: 0, opacity: 1, transition: { duration: 0.78, ease, delay: 0.1 } },
 };
 const flip3D: Variants = {
-  hidden: { rotateY: 90, opacity: 0, scale: 0.95 },
+  hidden: { rotateY: 88, opacity: 0, scale: 0.96 },
   visible: {
-    rotateY: 0,
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.75, ease, delay: 0.08 },
+    rotateY: 0, opacity: 1, scale: 1,
+    transition: { duration: 0.72, ease, delay: 0.06 },
   },
 };
 const popIn: Variants = {
   hidden: { scale: 0, opacity: 0 },
   visible: {
-    scale: 1,
-    opacity: 1,
-    transition: { type: "spring", stiffness: 280, damping: 16, delay: 0.9 },
+    scale: 1, opacity: 1,
+    transition: { type: "spring", stiffness: 290, damping: 17, delay: 0.88 },
   },
 };
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen bg-[#0a0a0a] overflow-hidden flex flex-col justify-center pt-24 pb-16">
-      <div className="w-full px-5 md:px-10 lg:px-16 max-w-[1400px] mx-auto">
+    <section className="relative min-h-screen bg-[#0a0a0a] overflow-hidden flex flex-col justify-center pt-20 pb-10">
+      {/* Consistent 20px padding matching Framer */}
+      <div className="w-full" style={{ paddingLeft: "20px", paddingRight: "20px" }}>
 
         {/* ── MOBILE ── */}
         <div className="flex flex-col md:hidden">
-          {/* HERMES LÓPEZ — right */}
+
+          {/* HERMES LÓPEZ — right, small, lime */}
           <div className="overflow-hidden text-right">
             <motion.p
               initial="hidden" animate="visible" variants={slideRight}
-              className="text-[6.5vw] font-bold text-[#CCFF33] uppercase tracking-tight leading-tight"
+              className="font-bold text-[#CCFF33] uppercase tracking-tight leading-tight"
+              style={{ fontSize: "clamp(16px, 5.5vw, 22px)" }}
             >
               Hermes López
             </motion.p>
           </div>
 
-          {/* PRODUCT — right */}
-          <div className="overflow-hidden text-right -mt-1">
+          {/* PRODUCT — right, massive */}
+          <div className="overflow-hidden text-right" style={{ marginTop: "-2px" }}>
             <motion.h1
               initial="hidden" animate="visible" variants={slideRight}
-              className="text-[22vw] font-black text-white uppercase leading-[0.85] tracking-[-0.04em]"
+              className="font-black text-white uppercase leading-[0.86] tracking-[-0.04em]"
+              style={{ fontSize: "clamp(60px, 18vw, 80px)" }}
             >
               Product
             </motion.h1>
           </div>
 
-          {/* Photo with 3D flip */}
-          <div className="flip-perspective mx-auto my-3" style={{ width: "72vw", maxWidth: "290px" }}>
+          {/* Photo — 70% screen width, centered, 3D flip */}
+          <div
+            className="flip-perspective mx-auto"
+            style={{ width: "70vw", maxWidth: "290px", marginTop: "10px", marginBottom: "8px" }}
+          >
             <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={flip3D}
+              initial="hidden" animate="visible" variants={flip3D}
               className="relative"
-              style={{
-                width: "100%",
-                paddingBottom: "124%",
-                transformStyle: "preserve-3d",
-              }}
+              style={{ paddingBottom: "128%", transformStyle: "preserve-3d" }}
             >
               <div className="absolute inset-0">
                 <Image
                   src="https://framerusercontent.com/images/QfImz8pV7G88zFaARXo4w2TU528.png"
                   alt="Hermes López"
-                  fill
-                  priority
+                  fill priority
                   className="object-cover object-top rounded-2xl"
                 />
-                {/* Hi badge with wave */}
+                {/* Wave badge */}
                 <motion.div
-                  initial="hidden"
-                  animate="visible"
-                  variants={popIn}
-                  className="absolute -bottom-4 -left-4 w-14 h-14 rounded-full bg-[#CCFF33] flex items-center justify-center z-10 shadow-xl cursor-pointer"
+                  initial="hidden" animate="visible" variants={popIn}
+                  className="absolute z-10"
+                  style={{ bottom: "-14px", left: "-14px" }}
                 >
-                  <span className="wave-hand text-xl select-none">👋</span>
+                  <div className="w-12 h-12 rounded-full bg-[#CCFF33] flex items-center justify-center shadow-lg">
+                    <span className="wave-hand text-lg select-none">👋</span>
+                  </div>
                 </motion.div>
               </div>
             </motion.div>
           </div>
 
-          {/* DESIGNER — left */}
-          <div className="overflow-hidden text-left mt-5">
+          {/* DESIGNER — left, massive */}
+          <div className="overflow-hidden text-left" style={{ marginTop: "8px" }}>
             <motion.h1
               initial="hidden" animate="visible" variants={slideLeft}
-              className="text-[22vw] font-black text-white uppercase leading-[0.85] tracking-[-0.04em]"
+              className="font-black text-white uppercase leading-[0.86] tracking-[-0.04em]"
+              style={{ fontSize: "clamp(60px, 18vw, 80px)" }}
             >
               Designer
             </motion.h1>
           </div>
 
-          {/* Tagline */}
+          {/* Tagline — left */}
           <motion.p
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.0, duration: 0.6 }}
-            className="mt-5 text-sm text-[#666] leading-relaxed"
+            transition={{ delay: 1.0, duration: 0.55 }}
+            className="text-[#666] leading-relaxed"
+            style={{ marginTop: "12px", fontSize: "14px", maxWidth: "340px" }}
           >
-            I&apos;m <span className="line-through text-[#444]">passionate</span> obsessed with creating products that simplify complex tasks.
+            I&apos;m <span className="line-through text-[#444]">passionate</span>{" "}
+            obsessed with creating products that simplify complex tasks.
           </motion.p>
         </div>
 
         {/* ── DESKTOP ── */}
-        <div className="hidden md:block">
-          {/* Name — right */}
-          <div className="text-right overflow-hidden mb-0">
+        <div className="hidden md:block max-w-[1300px] mx-auto">
+
+          {/* HERMES LÓPEZ — right */}
+          <div className="text-right overflow-hidden">
             <motion.p
               initial="hidden" animate="visible" variants={slideRight}
-              className="text-3xl lg:text-4xl font-bold text-[#CCFF33] uppercase tracking-tight leading-none"
+              className="font-bold text-[#CCFF33] uppercase tracking-tight leading-none"
+              style={{ fontSize: "clamp(20px, 2.4vw, 36px)" }}
             >
               Hermes López
             </motion.p>
           </div>
 
-          {/* PRODUCT | photo | DESIGNER */}
-          <div className="flex items-center">
-            <div className="overflow-hidden flex-1 text-right pr-3">
+          {/* Main row */}
+          <div className="flex items-center gap-0">
+            {/* PRODUCT — right side of left flex */}
+            <div className="overflow-hidden flex-1 text-right" style={{ paddingRight: "16px" }}>
               <motion.h1
                 initial="hidden" animate="visible" variants={slideRight}
-                className="text-[11vw] font-black text-white uppercase leading-[0.88] tracking-[-0.04em]"
+                className="font-black text-white uppercase leading-[0.88] tracking-[-0.04em]"
+                style={{ fontSize: "clamp(80px, 11vw, 160px)" }}
               >
                 Product
               </motion.h1>
             </div>
 
             {/* Photo — 3D flip */}
-            <div className="flip-perspective flex-shrink-0" style={{ width: "clamp(150px,16vw,270px)" }}>
+            <div
+              className="flip-perspective flex-shrink-0"
+              style={{ width: "clamp(150px, 17vw, 270px)" }}
+            >
               <motion.div
-                initial="hidden"
-                animate="visible"
-                variants={flip3D}
+                initial="hidden" animate="visible" variants={flip3D}
                 className="relative"
-                style={{
-                  paddingBottom: "124%",
-                  transformStyle: "preserve-3d",
-                }}
+                style={{ paddingBottom: "128%", transformStyle: "preserve-3d" }}
               >
                 <div className="absolute inset-0">
                   <Image
                     src="https://framerusercontent.com/images/QfImz8pV7G88zFaARXo4w2TU528.png"
                     alt="Hermes López"
-                    fill
-                    priority
+                    fill priority
                     className="object-cover object-top rounded-2xl"
                   />
                   <motion.div
-                    initial="hidden"
-                    animate="visible"
-                    variants={popIn}
-                    className="absolute -bottom-3 -left-5 w-14 h-14 rounded-full bg-[#CCFF33] flex items-center justify-center z-10 cursor-pointer"
+                    initial="hidden" animate="visible" variants={popIn}
+                    className="absolute z-10"
+                    style={{ bottom: "-12px", left: "-18px" }}
                   >
-                    <span className="wave-hand text-xl select-none">👋</span>
+                    <div className="w-14 h-14 rounded-full bg-[#CCFF33] flex items-center justify-center">
+                      <span className="wave-hand text-xl select-none">👋</span>
+                    </div>
                   </motion.div>
                 </div>
               </motion.div>
             </div>
 
-            <div className="overflow-hidden flex-1 pl-3">
+            {/* DESIGNER — left side of right flex */}
+            <div className="overflow-hidden flex-1 text-left" style={{ paddingLeft: "16px" }}>
               <motion.h1
                 initial="hidden" animate="visible" variants={slideLeft}
-                className="text-[11vw] font-black text-white uppercase leading-[0.88] tracking-[-0.04em]"
+                className="font-black text-white uppercase leading-[0.88] tracking-[-0.04em]"
+                style={{ fontSize: "clamp(80px, 11vw, 160px)" }}
               >
                 Designer
               </motion.h1>
@@ -181,24 +186,25 @@ export default function Hero() {
 
           {/* Tagline */}
           <motion.p
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.0, duration: 0.6 }}
-            className="mt-5 text-sm text-[#555] max-w-[220px] leading-relaxed"
+            transition={{ delay: 1.0, duration: 0.55 }}
+            className="text-[#555] leading-relaxed"
+            style={{ marginTop: "16px", fontSize: "14px", maxWidth: "220px" }}
           >
-            I&apos;m <span className="line-through text-[#3a3a3a]">passionate</span> obsessed with creating products that simplify complex tasks.
+            I&apos;m <span className="line-through text-[#3a3a3a]">passionate</span>{" "}
+            obsessed with creating products that simplify complex tasks.
           </motion.p>
         </div>
       </div>
 
-      {/* Scroll line */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 0.8 }}
         className="absolute bottom-6 left-1/2 -translate-x-1/2"
       >
-        <div className="w-px h-10 bg-gradient-to-b from-[#CCFF33]/25 to-transparent" />
+        <div className="w-px h-8 bg-gradient-to-b from-[#CCFF33]/20 to-transparent" />
       </motion.div>
     </section>
   );
