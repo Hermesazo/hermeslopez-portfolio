@@ -2,7 +2,21 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+
+function HLogo({ size = 22 }: { size?: number }) {
+  return (
+    <Image
+      src="/favicon.svg"
+      alt="H"
+      width={size}
+      height={size}
+      className="object-contain"
+      style={{ filter: "brightness(0)" }}
+    />
+  );
+}
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -14,7 +28,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Lock body scroll when menu open
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
@@ -28,127 +41,111 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Floating pill navbar */}
+      {/* Floating pill — auto width, centered */}
       <motion.div
-        initial={{ opacity: 0, y: -20 }}
+        initial={{ opacity: 0, y: -24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed top-5 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none"
+        className="fixed top-5 left-0 right-0 z-50 flex justify-center pointer-events-none px-4"
       >
         <div
           className={`
-            flex items-center justify-between gap-3
-            border border-white/20 rounded-full px-2 py-2
-            pointer-events-auto transition-all duration-300
-            ${scrolled ? "bg-[#0a0a0a]/85 backdrop-blur-lg" : "bg-[#111]/60 backdrop-blur-sm"}
+            inline-flex items-center gap-2 px-2 py-2
+            border border-white/15 rounded-full
+            pointer-events-auto transition-colors duration-300
+            ${scrolled ? "bg-[#0f0f0f]/90 backdrop-blur-xl" : "bg-[#0f0f0f]/50 backdrop-blur-md"}
           `}
-          style={{ width: "min(480px, calc(100vw - 32px))" }}
         >
           {/* Logo circle */}
-          <Link href="/" className="flex-shrink-0">
-            <div className="w-10 h-10 rounded-full bg-[#CCFF33] flex items-center justify-center">
-              <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-                <rect x="4" y="4" width="6" height="6" rx="1" fill="black"/>
-                <rect x="12" y="4" width="6" height="6" rx="1" fill="black"/>
-                <rect x="4" y="12" width="6" height="6" rx="1" fill="black"/>
-                <rect x="12" y="12" width="6" height="6" rx="1" fill="black"/>
-              </svg>
-            </div>
+          <Link href="/" className="flex-shrink-0 w-10 h-10 rounded-full bg-[#CCFF33] flex items-center justify-center">
+            <HLogo size={22} />
           </Link>
 
-          {/* Available for work */}
-          <div className="flex items-center gap-2 flex-1 justify-center">
-            <span className="text-sm text-white/80 font-medium whitespace-nowrap">Available for work</span>
+          {/* Available for work text */}
+          <div className="flex items-center gap-2 px-2">
+            <span className="text-sm text-white/75 font-medium whitespace-nowrap">Available for work</span>
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#CCFF33] opacity-75" />
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#4ade80] opacity-60" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#4ade80]" />
             </span>
           </div>
 
-          {/* Hamburger / desktop links */}
-          <div className="flex items-center gap-3 flex-shrink-0">
-            {/* Desktop links */}
-            <div className="hidden md:flex items-center gap-5 mr-2">
-              {links.map(l => (
-                <Link key={l.href} href={l.href} className="text-sm text-white/60 hover:text-white transition-colors">
-                  {l.label}
-                </Link>
-              ))}
-              <a
-                href="https://www.linkedin.com/in/hermeslopez1/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm font-semibold bg-[#CCFF33] text-black px-4 py-1.5 rounded-full hover:bg-[#d9ff66] transition-colors"
-              >
-                Contact
-              </a>
-            </div>
-
-            {/* Hamburger button (mobile) */}
-            <button
-              onClick={() => setMenuOpen(true)}
-              className="w-10 h-10 rounded-full bg-[#CCFF33] flex items-center justify-center md:hidden"
+          {/* Desktop nav links */}
+          <div className="hidden md:flex items-center gap-4 pl-2 pr-1">
+            {links.map(l => (
+              <Link key={l.href} href={l.href} className="text-sm text-white/55 hover:text-white transition-colors">
+                {l.label}
+              </Link>
+            ))}
+            <a
+              href="https://www.linkedin.com/in/hermeslopez1/"
+              target="_blank" rel="noopener noreferrer"
+              className="text-sm font-bold bg-[#CCFF33] text-black px-4 py-1.5 rounded-full hover:bg-[#d9ff55] transition-colors"
             >
-              <svg width="18" height="12" viewBox="0 0 18 12" fill="none">
-                <rect width="18" height="2" rx="1" fill="black"/>
-                <rect y="5" width="18" height="2" rx="1" fill="black"/>
-                <rect y="10" width="18" height="2" rx="1" fill="black"/>
-              </svg>
-            </button>
+              Contact
+            </a>
           </div>
+
+          {/* Hamburger (mobile only) */}
+          <button
+            onClick={() => setMenuOpen(true)}
+            className="md:hidden flex-shrink-0 w-10 h-10 rounded-full bg-[#CCFF33] flex items-center justify-center"
+            aria-label="Open menu"
+          >
+            <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
+              <rect width="16" height="2" rx="1" fill="black"/>
+              <rect y="5" width="16" height="2" rx="1" fill="black"/>
+              <rect y="10" width="16" height="2" rx="1" fill="black"/>
+            </svg>
+          </button>
         </div>
       </motion.div>
 
-      {/* Mobile menu overlay */}
+      {/* Mobile overlay menu */}
       <AnimatePresence>
         {menuOpen && (
-          <motion.div
-            key="menu"
-            initial={{ opacity: 0, scale: 0.96, y: -12 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.96, y: -12 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-[100] flex items-start justify-center px-4 pt-4"
-          >
-            {/* Backdrop */}
-            <div
-              className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+          <>
+            <motion.div
+              key="backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 z-[99] bg-black/50 backdrop-blur-sm"
               onClick={() => setMenuOpen(false)}
             />
-
-            {/* Menu card */}
-            <div
-              className="relative w-full rounded-3xl border border-white/15 bg-[#0e0e0e] p-6 pt-5 z-10"
-              style={{ maxWidth: "480px" }}
+            <motion.div
+              key="card"
+              initial={{ opacity: 0, scale: 0.95, y: -10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: -10 }}
+              transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+              className="fixed top-4 left-4 right-4 z-[100] rounded-3xl border border-white/12 bg-[#0d0d0d] p-5 pt-4"
+              style={{ maxWidth: "440px", margin: "0 auto" }}
             >
-              {/* Top row */}
-              <div className="flex items-center justify-between mb-10">
+              {/* Header row */}
+              <div className="flex items-center justify-between mb-8">
                 <div className="w-10 h-10 rounded-full bg-[#CCFF33] flex items-center justify-center">
-                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-                    <rect x="4" y="4" width="6" height="6" rx="1" fill="black"/>
-                    <rect x="12" y="4" width="6" height="6" rx="1" fill="black"/>
-                    <rect x="4" y="12" width="6" height="6" rx="1" fill="black"/>
-                    <rect x="12" y="12" width="6" height="6" rx="1" fill="black"/>
-                  </svg>
+                  <HLogo size={22} />
                 </div>
                 <button
                   onClick={() => setMenuOpen(false)}
                   className="w-10 h-10 rounded-full bg-[#CCFF33] flex items-center justify-center"
                 >
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <path d="M1 1L13 13M13 1L1 13" stroke="black" strokeWidth="2.2" strokeLinecap="round"/>
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <path d="M1 1L11 11M11 1L1 11" stroke="black" strokeWidth="2" strokeLinecap="round"/>
                   </svg>
                 </button>
               </div>
 
-              {/* Links */}
-              <nav className="flex flex-col gap-2 mb-8">
+              {/* Nav links */}
+              <div className="flex flex-col gap-1 mb-7">
                 {links.map((l, i) => (
                   <motion.div
                     key={l.href}
-                    initial={{ opacity: 0, y: 16 }}
+                    initial={{ opacity: 0, y: 14 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.05 + i * 0.06, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                    transition={{ delay: 0.04 + i * 0.05, duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                   >
                     <Link
                       href={l.href}
@@ -159,26 +156,22 @@ export default function Navbar() {
                     </Link>
                   </motion.div>
                 ))}
-              </nav>
+              </div>
 
-              {/* Contact button */}
-              <motion.div
-                initial={{ opacity: 0, y: 12 }}
+              {/* Contact */}
+              <motion.a
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.25, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ delay: 0.22, duration: 0.35 }}
+                href="https://www.linkedin.com/in/hermeslopez1/"
+                target="_blank" rel="noopener noreferrer"
+                onClick={() => setMenuOpen(false)}
+                className="block w-full text-center bg-[#CCFF33] text-black font-bold text-lg py-4 rounded-full hover:bg-[#d9ff55] transition-colors"
               >
-                <a
-                  href="https://www.linkedin.com/in/hermeslopez1/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setMenuOpen(false)}
-                  className="block w-full text-center bg-[#CCFF33] text-black font-semibold text-lg py-4 rounded-full hover:bg-[#d9ff66] transition-colors"
-                >
-                  Contact
-                </a>
-              </motion.div>
-            </div>
-          </motion.div>
+                Contact
+              </motion.a>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>

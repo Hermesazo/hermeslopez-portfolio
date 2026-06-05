@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 :root {
+  color-scheme: dark;
   --bg: #0a0a0a;
   --surface: #111111;
   --border: #1f1f1f;
@@ -17,21 +18,34 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-* {
-  box-sizing: border-box;
+* { box-sizing: border-box; }
+
+::selection { background: rgba(204,255,51,0.2); }
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 2px; }
+
+/* Waving hand keyframe */
+@keyframes wave-hand {
+  0%   { transform: rotate(0deg); }
+  10%  { transform: rotate(18deg); }
+  20%  { transform: rotate(-8deg); }
+  30%  { transform: rotate(18deg); }
+  40%  { transform: rotate(-4deg); }
+  50%  { transform: rotate(14deg); }
+  60%  { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
 }
 
-::selection {
-  background: rgba(255, 255, 255, 0.15);
+.wave-hand {
+  display: inline-block;
+  transform-origin: 70% 70%;
+  animation: wave-hand 2.2s ease-in-out 1.2s 2;
 }
 
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--bg);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--border);
-  border-radius: 3px;
+/* 3D flip perspective container */
+.flip-perspective {
+  perspective: 900px;
+  perspective-origin: center center;
 }

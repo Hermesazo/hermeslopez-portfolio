@@ -10,17 +10,18 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Hermes López — Product Designer",
-  description:
-    "Product designer passionate about creating products that simplify complex tasks.",
+  description: "Product designer passionate about creating products that simplify complex tasks.",
+  icons: {
+    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+  },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${inter.variable} h-full`}>
+      <head>
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+      </head>
       <body className="min-h-full flex flex-col bg-[#0a0a0a] text-white antialiased">
         {children}
       </body>
